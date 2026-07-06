@@ -10,6 +10,14 @@
       "bgColor": "#ffffff",
       "textColor": "#1C2A24",
       "btnBgColor": "#EBC8A1"
+    },
+    {
+      "id": "b3",
+      "type": "article",
+      "image": "",
+      "title": "dddd",
+      "description": "Описание",
+      "link": "#"
     }
   ]
 }
