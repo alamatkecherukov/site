@@ -1,3 +1,15 @@
 {
-  "blocks": []
+  "blocks": [
+    {
+      "id": "b2",
+      "type": "header",
+      "logo": "Мой сайт",
+      "showBtn": true,
+      "btnText": "Связаться",
+      "btnLink": "#",
+      "bgColor": "#ffffff",
+      "textColor": "#1C2A24",
+      "btnBgColor": "#EBC8A1"
+    }
+  ]
 }
