@@ -19,5 +19,94 @@
       "description": "Описание",
       "link": "#"
     }
-  ]
+  ],
+  "pages": {
+    "home": {
+      "blocks": [
+        {
+          "id": "b2",
+          "type": "header",
+          "logo": "A storehouse of knowledge",
+          "showBtn": true,
+          "btnText": "-",
+          "btnLink": "#",
+          "bgColor": "#ffffff",
+          "textColor": "#1C2A24",
+          "btnBgColor": "#EBC8A1"
+        }
+      ]
+    },
+    "articles": {
+      "blocks": [
+        {
+          "id": "b3",
+          "type": "article",
+          "image": "",
+          "title": "Название статьи",
+          "description": "Описание",
+          "link": "#"
+        }
+      ]
+    },
+    "socials": {
+      "blocks": [
+        {
+          "id": "b4",
+          "type": "services",
+          "title": "Наши услуги",
+          "items": [
+            {
+              "icon": "🌳",
+              "title": "Услуга 1",
+              "desc": "Описание"
+            },
+            {
+              "icon": "🏡",
+              "title": "Услуга 2",
+              "desc": "Описание"
+            },
+            {
+              "icon": "🎨",
+              "title": "Услуга 3",
+              "desc": "Описание"
+            }
+          ]
+        }
+      ]
+    },
+    "about": {
+      "blocks": [
+        {
+          "id": "b6",
+          "type": "footer",
+          "text": "© 2026 Мой сайт",
+          "bgColor": "#1C2A24",
+          "textColor": "#d4d4d0",
+          "socials": [
+            {
+              "platform": "Instagram",
+              "url": "#"
+            },
+            {
+              "platform": "Telegram",
+              "url": "#"
+            },
+            {
+              "platform": "YouTube",
+              "url": "#"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "header": {
+    "logo": "Мой сайт",
+    "showBtn": true,
+    "btnText": "Связаться",
+    "btnLink": "#",
+    "bgColor": "#ffffff",
+    "textColor": "#1C2A24",
+    "btnBgColor": "#EBC8A1"
+  }
 }
