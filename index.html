@@ -72,6 +72,7 @@
             font-size: 26px;
             font-weight: 700;
             color: #2F5E52;
+            cursor: pointer;
         }
         .block-header .logo span {
             color: #A06A4C;
@@ -83,13 +84,33 @@
             font-size: 14px;
             flex-wrap: wrap;
         }
-        .block-header .nav a {
+        .block-header .nav button {
+            background: none;
+            border: none;
             color: #1C2A24;
-            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Inter', Arial, sans-serif;
+            padding: 4px 0;
             transition: color 0.3s;
+            position: relative;
         }
-        .block-header .nav a:hover {
+        .block-header .nav button:hover {
             color: #2F5E52;
+        }
+        .block-header .nav button.active {
+            color: #2F5E52;
+        }
+        .block-header .nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #2F5E52;
+            border-radius: 2px;
         }
         .block-header .header-btn {
             background: #EBC8A1;
@@ -288,6 +309,19 @@
             font-size: 28px;
             margin-bottom: 8px;
         }
+        .page-content {
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         @media (max-width: 820px) {
             .block-grid .grid-4 {
                 grid-template-columns: repeat(2, 1fr);
@@ -344,13 +378,18 @@
 
     <script>
         // ============================================================
-        //  ЗАГРУЗКА DATA.JSON (с запасными путями)
+        //  ПЕРЕМЕННЫЕ
+        // ============================================================
+        let siteData = null;
+        let currentPage = 'home';
+
+        // ============================================================
+        //  ЗАГРУЗКА DATA.JSON
         // ============================================================
         async function loadSite() {
             const loading = document.getElementById('loading');
             const content = document.getElementById('content');
 
-            // Список путей для проверки
             const paths = [
                 'data.json',
                 './data.json',
@@ -363,18 +402,13 @@
 
             for (const path of paths) {
                 try {
-                    console.log(`Пытаюсь загрузить: ${path}`);
                     const resp = await fetch(path + '?t=' + Date.now());
                     if (resp.ok) {
                         data = await resp.json();
-                        console.log(`✅ Загружено: ${path}`);
+                        console.log('✅ Загружено:', path);
                         break;
-                    } else {
-                        console.warn(`❌ Ошибка ${resp.status}: ${path}`);
-                        lastError = `Ошибка ${resp.status}`;
                     }
                 } catch (e) {
-                    console.warn(`⚠️ Не удалось загрузить ${path}:`, e.message);
                     lastError = e.message;
                 }
             }
@@ -382,13 +416,14 @@
             loading.style.display = 'none';
             content.style.display = 'block';
 
-            if (data && data.blocks) {
-                content.innerHTML = renderSite(data);
+            if (data && data.pages) {
+                siteData = data;
+                renderSite(data);
             } else if (data) {
-                content.innerHTML = renderError('Файл data.json найден, но не содержит блоков.');
+                content.innerHTML = renderError('Файл data.json найден, но нет страниц.');
             } else {
                 content.innerHTML = renderError(
-                    'Не удалось загрузить data.json. Убедитесь, что файл лежит в той же папке, что и index.html.' +
+                    'Не удалось загрузить data.json. Убедитесь, что файл лежит в той же папке.' +
                     '<br><small>Ошибка: ' + (lastError || 'неизвестная') + '</small>'
                 );
             }
@@ -398,23 +433,92 @@
         //  РЕНДЕР САЙТА
         // ============================================================
         function renderSite(data) {
-            const blocks = data.blocks || [];
-            if (blocks.length === 0) {
+            const pages = data.pages || {};
+            const pageKeys = Object.keys(pages);
+
+            if (pageKeys.length === 0) {
                 return renderEmpty();
             }
 
-            let html = '<div class="container">';
+            // Если текущей страницы нет — берём первую
+            if (!pages[currentPage]) {
+                currentPage = pageKeys[0];
+            }
+
+            return `
+                    <div class="container">
+                        ${renderHeader(data, pageKeys)}
+                        <div class="page-content" id="pageContent">
+                            ${renderPage(pages[currentPage])}
+                        </div>
+                    </div>
+                `;
+        }
+
+        // ============================================================
+        //  ШАПКА
+        // ============================================================
+        function renderHeader(data, pageKeys) {
+            const headerBlock = data.header || {};
+            const pageNames = {
+                home: 'Главная',
+                articles: 'Статьи',
+                socials: 'Соцсети',
+                about: 'О нас'
+            };
+
+            let navHTML = '';
+            pageKeys.forEach(key => {
+                const label = pageNames[key] || key;
+                const active = key === currentPage ? 'active' : '';
+                navHTML += `<button class="${active}" onclick="switchPage('${key}')">${label}</button>`;
+            });
+
+            let btnHTML = '';
+            if (headerBlock.showBtn !== false) {
+                btnHTML =
+                    `<a href="${headerBlock.btnLink || '#'}" class="header-btn" style="background:${headerBlock.btnBgColor || '#EBC8A1'};color:${headerBlock.textColor || '#1C2A24'};">${headerBlock.btnText || 'Связаться'}</a>`;
+            }
+
+            return `
+                    <div class="block block-header" style="background:${headerBlock.bgColor || '#ffffff'};color:${headerBlock.textColor || '#1C2A24'};">
+                        <div class="block-inner header-content">
+                            <div class="logo" onclick="switchPage('home')">${headerBlock.logo || 'Мой сайт'}<span>.</span></div>
+                            <div class="nav">${navHTML}</div>
+                            ${btnHTML}
+                        </div>
+                    </div>
+                `;
+        }
+
+        // ============================================================
+        //  РЕНДЕР СТРАНИЦЫ
+        // ============================================================
+        function renderPage(page) {
+            const blocks = page.blocks || [];
+            if (blocks.length === 0) {
+                return `
+                        <div class="empty-state">
+                            <h2>📄 Страница пуста</h2>
+                            <p>Добавьте блоки через редактор.</p>
+                        </div>
+                    `;
+            }
+
+            let html = '';
             blocks.forEach(block => {
                 html += renderBlock(block);
             });
-            html += '</div>';
             return html;
         }
 
+        // ============================================================
+        //  РЕНДЕР БЛОКА
+        // ============================================================
         function renderBlock(block) {
             switch (block.type) {
                 case 'header':
-                    return renderHeader(block);
+                    return ''; // Шапка уже отрендерена отдельно
                 case 'hero':
                     return renderHero(block);
                 case 'advantages':
@@ -430,26 +534,6 @@
                 default:
                     return '';
             }
-        }
-
-        function renderHeader(block) {
-            let btnHTML = '';
-            if (block.showBtn !== false) {
-                btnHTML = `<a href="${block.btnLink || '#'}" class="header-btn" style="background:${block.btnBgColor || '#EBC8A1'};color:${block.textColor || '#1C2A24'};">${block.btnText || 'Связаться'}</a>`;
-            }
-            return `
-                    <div class="block block-header" style="background:${block.bgColor || '#ffffff'};color:${block.textColor || '#1C2A24'};">
-                        <div class="block-inner header-content">
-                            <div class="logo">${block.logo || 'Мой сайт'}<span>.</span></div>
-                            <div class="nav">
-                                <a href="#" style="color:${block.textColor || '#1C2A24'};">Главная</a>
-                                <a href="#" style="color:${block.textColor || '#1C2A24'};">Статьи</a>
-                                <a href="#" style="color:${block.textColor || '#1C2A24'};">О нас</a>
-                            </div>
-                            ${btnHTML}
-                        </div>
-                    </div>
-                `;
         }
 
         function renderHero(block) {
@@ -534,13 +618,61 @@
                 `;
         }
 
+        // ============================================================
+        //  ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+        // ============================================================
+        function switchPage(page) {
+            if (!siteData || !siteData.pages) return;
+            if (!siteData.pages[page]) return;
+
+            currentPage = page;
+
+            // Обновляем активную кнопку в навигации
+            document.querySelectorAll('.nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const nav = document.querySelector('.nav');
+            if (nav) {
+                const btns = nav.querySelectorAll('button');
+                const pageNames = {
+                    home: 'Главная',
+                    articles: 'Статьи',
+                    socials: 'Соцсети',
+                    about: 'О нас'
+                };
+                btns.forEach(btn => {
+                    const label = btn.textContent;
+                    const target = Object.keys(pageNames).find(k => pageNames[k] === label);
+                    if (target === page) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            // Обновляем контент
+            const content = document.getElementById('pageContent');
+            if (content) {
+                content.innerHTML = renderPage(siteData.pages[page]);
+                // Перезапускаем анимацию
+                content.style.animation = 'none';
+                requestAnimationFrame(() => {
+                    content.style.animation = 'fadeIn 0.3s ease';
+                });
+            }
+
+            // Прокручиваем наверх
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        //  ПУСТОЙ / ОШИБКА
+        // ============================================================
         function renderEmpty() {
             return `
                     <div class="container">
                         <div class="empty-state">
                             <h2>✨ Сайт пока пуст</h2>
-                            <p>Добавьте блоки через редактор, и они появятся здесь.</p>
-                            <p style="margin-top:12px;font-size:13px;color:#bbb;">Откройте editor.html и начните создавать!</p>
+                            <p>Добавьте страницы и блоки через редактор.</p>
                         </div>
                     </div>
                 `;
@@ -552,12 +684,6 @@
                         <div class="error-state">
                             <h2>⚠️ Ошибка загрузки</h2>
                             <p>${msg}</p>
-                            <p style="margin-top:12px;font-size:13px;color:#888;">
-                                Проверьте, что файл <strong>data.json</strong> лежит в той же папке, что и index.html.
-                            </p>
-                            <p style="font-size:13px;color:#888;">
-                                Откройте консоль браузера (F12) для подробностей.
-                            </p>
                         </div>
                     </div>
                 `;
