@@ -105,13 +105,11 @@
             siteData = data;
             pageKeys = Object.keys(data.pages || {});
             if (pageKeys.length === 0) {
-                // Если нет страниц, создаём одну из корневых blocks
                 const blocks = data.blocks || [];
                 siteData.pages = { home: { blocks: blocks } };
                 pageKeys = ['home'];
             }
 
-            // Если текущей страницы нет в списке — берём первую
             if (!pageKeys.includes(currentPage)) {
                 currentPage = pageKeys[0];
             }
@@ -132,8 +130,27 @@
             updateActiveNav();
         }
 
+        function getHeaderFromPage(pageKey) {
+            const page = siteData.pages[pageKey];
+            if (!page) return null;
+            const blocks = page.blocks || [];
+            return blocks.find(b => b.type === 'header') || null;
+        }
+
         function renderHeader() {
-            const header = siteData.header || {};
+            // Сначала ищем блок header на текущей странице
+            let header = getHeaderFromPage(currentPage);
+            
+            // Если нет — ищем на главной
+            if (!header) {
+                header = getHeaderFromPage('home');
+            }
+            
+            // Если всё равно нет — берём глобальный
+            if (!header) {
+                header = siteData.header || {};
+            }
+
             const pageNames = { home:'Главная', articles:'Статьи', socials:'Соцсети', about:'О нас' };
 
             let navHTML = pageKeys.map(key => {
@@ -257,6 +274,12 @@
                 pageContent.innerHTML = renderPage(page);
                 pageContent.style.animation = 'none';
                 requestAnimationFrame(() => { pageContent.style.animation = 'fadeIn 0.3s ease'; });
+            }
+
+            // Обновляем шапку
+            const headerEl = document.querySelector('.block-header');
+            if (headerEl) {
+                headerEl.outerHTML = renderHeader();
             }
 
             updateActiveNav();
