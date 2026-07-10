@@ -24,11 +24,11 @@
     "home": {
       "blocks": [
         {
-          "id": "b2",
+          "id": "b1",
           "type": "header",
-          "logo": "A storehouse of knowledge",
+          "logo": "вапрол",
           "showBtn": true,
-          "btnText": "-",
+          "btnText": "Связаться",
           "btnLink": "#",
           "bgColor": "#ffffff",
           "textColor": "#1C2A24",
