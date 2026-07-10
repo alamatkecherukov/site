@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* ===== СТИЛИ (те же, что были) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', Arial, sans-serif;
@@ -268,61 +269,95 @@
     <script>
         let siteData = null;
         let currentPage = 'home';
+        let pageKeys = [];
 
+        // ============================================================
+        //  ЗАГРУЗКА
+        // ============================================================
         async function loadSite() {
             const loading = document.getElementById('loading');
             const content = document.getElementById('content');
-            const paths = ['data.json', './data.json', '/data.json'];
-            let data = null;
-            let lastError = null;
 
-            for (const path of paths) {
-                try {
-                    const resp = await fetch(path + '?t=' + Date.now());
-                    if (resp.ok) {
-                        data = await resp.json();
-                        console.log('✅ Загружено:', path);
-                        break;
-                    }
-                } catch (e) { lastError = e.message; }
-            }
+            try {
+                const resp = await fetch('data.json?t=' + Date.now());
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const rawData = await resp.json();
+                console.log('✅ Загружено data.json', rawData);
 
-            loading.style.display = 'none';
-            content.style.display = 'block';
+                // Нормализуем данные
+                siteData = normalizeData(rawData);
+                console.log('📦 Нормализованные данные:', siteData);
 
-            if (data && data.pages) {
-                siteData = data;
-                renderSite(data);
-            } else if (data && data.blocks) {
-                // Старая структура — конвертируем
-                siteData = { header: data.header || {}, pages: { home: { blocks: data.blocks || [] } } };
+                loading.style.display = 'none';
+                content.style.display = 'block';
                 renderSite(siteData);
-            } else if (data) {
-                content.innerHTML = renderError('Файл data.json найден, но нет страниц.');
-            } else {
-                content.innerHTML = renderError('Не удалось загрузить data.json. ' + (lastError || ''));
+
+            } catch (e) {
+                console.error('❌ Ошибка загрузки:', e);
+                loading.style.display = 'none';
+                content.style.display = 'block';
+                content.innerHTML = `
+                    <div class="container">
+                        <div class="empty-state">
+                            <h2>⚠️ Ошибка загрузки</h2>
+                            <p>Не удалось загрузить data.json: ${e.message}</p>
+                            <p style="font-size:13px;color:#888;">Убедитесь, что файл лежит в той же папке.</p>
+                        </div>
+                    </div>
+                `;
             }
         }
 
+        // ============================================================
+        //  НОРМАЛИЗАЦИЯ ДАННЫХ
+        // ============================================================
+        function normalizeData(raw) {
+            // Если есть pages — используем их
+            let pages = raw.pages || {};
+            let header = raw.header || { logo: 'Мой сайт', showBtn: true, btnText: 'Связаться', btnLink: '#', bgColor: '#ffffff', textColor: '#1C2A24', btnBgColor: '#EBC8A1' };
+
+            // Если нет pages, но есть blocks — создаём страницу home
+            if (Object.keys(pages).length === 0 && raw.blocks && Array.isArray(raw.blocks)) {
+                pages = { home: { blocks: raw.blocks } };
+            }
+
+            // Убедимся, что у каждой страницы есть blocks
+            for (let key in pages) {
+                if (!pages[key].blocks) pages[key].blocks = [];
+            }
+
+            return { header, pages };
+        }
+
+        // ============================================================
+        //  РЕНДЕР
+        // ============================================================
         function renderSite(data) {
             const pages = data.pages || {};
-            const pageKeys = Object.keys(pages);
-            if (pageKeys.length === 0) return renderEmpty();
+            pageKeys = Object.keys(pages);
+            if (pageKeys.length === 0) {
+                document.getElementById('content').innerHTML = renderEmpty();
+                return;
+            }
 
+            // Если текущая страница не существует — берём первую
             if (!pages[currentPage]) currentPage = pageKeys[0];
 
-            return `
+            const html = `
                 <div class="container">
-                    ${renderHeader(data, pageKeys)}
+                    ${renderHeader(data.header, pageKeys)}
                     <div class="page-content" id="pageContent">
                         ${renderPage(pages[currentPage])}
                     </div>
                 </div>
             `;
+            document.getElementById('content').innerHTML = html;
         }
 
-        function renderHeader(data, pageKeys) {
-            const headerBlock = data.header || {};
+        // ============================================================
+        //  ШАПКА
+        // ============================================================
+        function renderHeader(header, pageKeys) {
             const pageNames = { home:'Главная', articles:'Статьи', socials:'Соцсети', about:'О нас' };
             let navHTML = pageKeys.map(key => {
                 const label = pageNames[key] || key;
@@ -331,14 +366,14 @@
             }).join('');
 
             let btnHTML = '';
-            if (headerBlock.showBtn !== false) {
-                btnHTML = `<a href="${headerBlock.btnLink || '#'}" class="header-btn" style="background:${headerBlock.btnBgColor || '#EBC8A1'};color:${headerBlock.textColor || '#1C2A24'};">${headerBlock.btnText || 'Связаться'}</a>`;
+            if (header.showBtn !== false) {
+                btnHTML = `<a href="${header.btnLink || '#'}" class="header-btn" style="background:${header.btnBgColor || '#EBC8A1'};color:${header.textColor || '#1C2A24'};">${header.btnText || 'Связаться'}</a>`;
             }
 
             return `
-                <div class="block block-header" style="background:${headerBlock.bgColor || '#ffffff'};color:${headerBlock.textColor || '#1C2A24'};">
+                <div class="block block-header" style="background:${header.bgColor || '#ffffff'};color:${header.textColor || '#1C2A24'};">
                     <div class="block-inner header-content">
-                        <div class="logo" onclick="switchPage('home')">${headerBlock.logo || 'Мой сайт'}<span>.</span></div>
+                        <div class="logo" onclick="switchPage('home')">${header.logo || 'Мой сайт'}<span>.</span></div>
                         <div class="nav">${navHTML}</div>
                         ${btnHTML}
                     </div>
@@ -346,16 +381,28 @@
             `;
         }
 
+        // ============================================================
+        //  СТРАНИЦА
+        // ============================================================
         function renderPage(page) {
             const blocks = page.blocks || [];
             if (blocks.length === 0) {
                 return `<div class="empty-state"><h2>📄 Страница пуста</h2><p>Добавьте блоки через редактор.</p></div>`;
             }
+
+            // Фильтруем блоки: исключаем 'header' и 'footer', т.к. они рендерятся отдельно или могут быть в любом месте
+            // Но мы их всё равно рендерим, если они есть (кроме header, потому что шапка уже есть)
             let html = '';
-            blocks.forEach(block => { html += renderBlock(block); });
+            blocks.forEach(block => {
+                if (block.type === 'header') return; // Шапка уже есть глобально
+                html += renderBlock(block);
+            });
             return html;
         }
 
+        // ============================================================
+        //  БЛОКИ
+        // ============================================================
         function renderBlock(block) {
             switch (block.type) {
                 case 'hero': return renderHero(block);
@@ -364,7 +411,7 @@
                 case 'article': return renderArticle(block);
                 case 'video': return renderVideo(block);
                 case 'footer': return renderFooter(block);
-                default: return '';
+                default: return `<div style="background:#fff;padding:20px;border-radius:16px;margin:10px 0;">Неизвестный тип блока: ${block.type}</div>`;
             }
         }
 
@@ -431,17 +478,20 @@
             </div>`;
         }
 
+        // ============================================================
+        //  ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+        // ============================================================
         function switchPage(page) {
             if (!siteData || !siteData.pages || !siteData.pages[page]) return;
             currentPage = page;
 
             // Обновляем активную кнопку
-            document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
             const nav = document.querySelector('.nav');
             if (nav) {
                 const btns = nav.querySelectorAll('button');
                 const pageNames = { home:'Главная', articles:'Статьи', socials:'Соцсети', about:'О нас' };
                 btns.forEach(btn => {
+                    btn.classList.remove('active');
                     const label = btn.textContent;
                     const target = Object.keys(pageNames).find(k => pageNames[k] === label);
                     if (target === page) btn.classList.add('active');
@@ -457,14 +507,16 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ============================================================
+        //  ПУСТОЙ/ОШИБКА
+        // ============================================================
         function renderEmpty() {
             return `<div class="container"><div class="empty-state"><h2>✨ Сайт пока пуст</h2><p>Добавьте блоки через редактор.</p></div></div>`;
         }
 
-        function renderError(msg) {
-            return `<div class="container"><div class="empty-state"><h2>⚠️ Ошибка загрузки</h2><p>${msg}</p></div></div>`;
-        }
-
+        // ============================================================
+        //  ЗАПУСК
+        // ============================================================
         loadSite();
     </script>
 </body>
