@@ -25,18 +25,6 @@
       "blocks": [
         {
           "id": "b1",
-          "type": "header",
-          "logo": "A storehouse of knowledge",
-          "showBtn": false,
-          "btnText": "Связаться",
-          "btnLink": "#",
-          "bgColor": "#ffffff",
-          "textColor": "#1C2A24",
-          "btnBgColor": "#EBC8A1",
-          "title": "A storehouse of knowledge"
-        },
-        {
-          "id": "b1",
           "type": "hero",
           "title": "General",
           "subtitle": "на главной странице можно найти много всего интересного",
