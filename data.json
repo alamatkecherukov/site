@@ -30,6 +30,12 @@
           "title": "Название статьи",
           "description": "Описание",
           "link": "#"
+        },
+        {
+          "id": "b1",
+          "type": "video",
+          "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "title": "Видео"
         }
       ]
     },
