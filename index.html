@@ -117,19 +117,6 @@
             renderSite();
         }
 
-        function renderSite() {
-            const container = document.getElementById('content');
-            container.innerHTML = `
-                <div class="container">
-                    ${renderHeader()}
-                    <div class="page-content" id="pageContent">
-                        ${renderPage(currentPage)}
-                    </div>
-                </div>
-            `;
-            updateActiveNav();
-        }
-
         function getHeaderFromPage(pageKey) {
             const page = siteData.pages[pageKey];
             if (!page) return null;
@@ -138,18 +125,10 @@
         }
 
         function renderHeader() {
-            // Сначала ищем блок header на текущей странице
+            // Ищем блок header: сначала на текущей странице, потом на главной, потом глобальный
             let header = getHeaderFromPage(currentPage);
-            
-            // Если нет — ищем на главной
-            if (!header) {
-                header = getHeaderFromPage('home');
-            }
-            
-            // Если всё равно нет — берём глобальный
-            if (!header) {
-                header = siteData.header || {};
-            }
+            if (!header) header = getHeaderFromPage('home');
+            if (!header) header = siteData.header || {};
 
             const pageNames = { home:'Главная', articles:'Статьи', socials:'Соцсети', about:'О нас' };
 
