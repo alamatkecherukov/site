@@ -33,6 +33,14 @@
           "bgColor": "#ffffff",
           "textColor": "#1C2A24",
           "btnBgColor": "#EBC8A1"
+        },
+        {
+          "id": "b1",
+          "type": "hero",
+          "title": "General",
+          "subtitle": "на главной странице можно найти много всего интересного",
+          "bgColor": "#e5e5d1",
+          "textColor": "#1C2A24"
         }
       ]
     },
