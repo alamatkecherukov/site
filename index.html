@@ -66,11 +66,11 @@
         .block-footer .footer-socials a:hover { opacity: 1; color: #EBC8A1; }
         .block-footer .footer-text { font-size: 13px; opacity: 0.5; }
 
-        /* ===== ФОТО-КНОПКА — адаптивная сетка ===== */
+        /* ===== ФОТО-КНОПКА — всегда 2 колонки ===== */
         .block-photo-button .grid {
             display: grid;
             gap: 20px;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
         }
         .block-photo-button .grid-item {
             padding: 0;
@@ -113,6 +113,7 @@
             .block-grid .grid-4 { grid-template-columns: repeat(2,1fr); }
             .block-grid .grid-3 { grid-template-columns: repeat(2,1fr); }
             .block-grid .grid-2 { grid-template-columns: 1fr 1fr; }
+            /* Фото-кнопки остаются 2 колонки */
             .block-photo-button .grid { grid-template-columns: repeat(2, 1fr); }
             .block-header .header-content { flex-direction: column; align-items: stretch; }
             .block-header .nav { justify-content: center; }
@@ -123,7 +124,8 @@
         }
         @media (max-width: 480px) {
             .block-grid .grid-4, .block-grid .grid-3, .block-grid .grid-2 { grid-template-columns: 1fr; }
-            .block-photo-button .grid { grid-template-columns: 1fr; }
+            /* Фото-кнопки — тоже 2 колонки на телефоне */
+            .block-photo-button .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .block-photo-button .grid-item .img-wrap { aspect-ratio: 1 / 1; }
             .block-hero h1 { font-size: 26px; }
             .block-header .nav { gap: 14px; font-size: 13px; }
@@ -373,7 +375,7 @@
                 </div>`;
         }
 
-        // ===== ФОТО-КНОПКА =====
+        // ===== ФОТО-КНОПКА — всегда 2 колонки =====
         function renderPhotoButtons(block, styleAttr) {
             const items = block.items || [];
             let gridHTML = items.map(item => {
