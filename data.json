@@ -313,19 +313,19 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b1",
           "type": "footer",
           "background": {
             "type": "color",
-            "value": "#312626"
+            "value": "transparent"
           },
-          "shadow": "none",
+          "shadow": "custom",
           "shadowIntensity": 15,
           "shadowBlur": 20,
           "shadowX": 0,
           "shadowY": 8,
           "shadowColor": "#000000",
-          "text": "© 2026 A storehouse of knowledge",
+          "text": "© 2026 Мой сайт",
           "bgColor": "#1C2A24",
           "textColor": "#d4d4d0",
           "socials": [
