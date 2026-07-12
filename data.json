@@ -271,7 +271,7 @@
           "type": "photo-button",
           "background": {
             "type": "color",
-            "value": "transparent"
+            "value": "#7d7d4f"
           },
           "shadow": "custom",
           "shadowIntensity": 15,
