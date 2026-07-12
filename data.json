@@ -52,7 +52,7 @@
           "type": "hero",
           "background": {
             "type": "color",
-            "value": "#afb785"
+            "value": "#ffffff"
           },
           "shadow": "custom",
           "shadowIntensity": "2",
@@ -82,6 +82,114 @@
           "title": "Как возникла религия?",
           "description": "Отрывок из книги «Последний пророк: Доказательства подлинности Ислама»",
           "link": "https://telegra.ph/Kak-voznikla-religiya--Nekotorye-ateisty-utverzhdayut-chto-totemizm-lezhit-v-osnove-vseh-religij-06-02"
+        },
+        {
+          "id": "b3",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "2",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Достаточно ли верить в Аллаха как в Творца Вселенной, не веря при этом в пророков и посланников?",
+          "description": "Отрывок из книги «Басоир» — доктор Хейсам Талаат",
+          "link": "https://telegra.ph/Dostatochno-li-verit-v-Allaha-kak-v-Tvorca-Vselennoj-ne-verya-pri-ehtom-v-prorokov-i-poslannikov-05-24"
+        },
+        {
+          "id": "b4",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "2",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Доказательство бытия Бога через врожденную природу",
+          "description": "Что такое доказательство фитры (врождённой природы)?",
+          "link": "https://telegra.ph/CHto-takoe-dokazatelstvo-fitry-vrozhdyonnoj-prirody-04-30"
+        },
+        {
+          "id": "b5",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "2",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Хутба: «Высшая мудрость»",
+          "description": "",
+          "link": "https://telegra.ph/Hutba-Vysshaya-mudrost-04-19"
+        },
+        {
+          "id": "b6",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "2",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Наша Вселенная — одна из множества возможных параллельных вселенных, которая по случайности оказалась пригодной для существования жизни. Но так ли это?",
+          "description": "",
+          "link": "https://telegra.ph/Nasha-Vselennaya--odna-iz-mnozhestva-vozmozhnyh-parallelnyh-vselennyh-kotoraya-po-sluchajnosti-okazalas-prigodnoj-dlya-sushchest-04-18"
+        },
+        {
+          "id": "b7",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "3",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Существует ли в исламе хадд (предусмотренное законом наказание) за вероотступничество?",
+          "description": "Отрывок из книги «Басоир» — доктор Хейсам Талаат",
+          "link": "https://telegra.ph/Sushchestvuet-li-v-islame-hadd-predusmotrennoe-zakonom-nakazanie-za-verootstupnichestvo-04-02"
+        },
+        {
+          "id": "b8",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "3",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Существуют ли хадисы, которые передаются исключительно аль-Бухари в его \"Cахихе\"?",
+          "description": "",
+          "link": "https://telegra.ph/Sushchestvuyut-li-hadisy-kotorye-peredayutsya-isklyuchitelno-ot-al-Buhari-v-ego-sahihe-03-26"
         }
       ],
       "background": {
