@@ -38,6 +38,24 @@
           "textColor": "#1C2A24",
           "btnBgColor": "#EBC8A1",
           "title": "Хранилище знаний"
+        },
+        {
+          "id": "b13",
+          "type": "hero",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "title": "Заголовок",
+          "subtitle": "Подзаголовок",
+          "bgColor": "#f0f0f0",
+          "textColor": "#1C2A24"
         }
       ],
       "background": {
@@ -257,7 +275,7 @@
             "value": "transparent"
           },
           "shadow": "custom",
-          "shadowIntensity": "7",
+          "shadowIntensity": "16",
           "shadowBlur": 20,
           "shadowX": 0,
           "shadowY": 8,
@@ -299,7 +317,7 @@
           "type": "footer",
           "background": {
             "type": "color",
-            "value": "transparent"
+            "value": "#312626"
           },
           "shadow": "none",
           "shadowIntensity": 15,
