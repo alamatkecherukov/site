@@ -52,7 +52,7 @@
           "type": "hero",
           "background": {
             "type": "color",
-            "value": "#5b7057"
+            "value": "#afb785"
           },
           "shadow": "custom",
           "shadowIntensity": "2",
