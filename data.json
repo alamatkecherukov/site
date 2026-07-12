@@ -190,6 +190,37 @@
           "title": "Существуют ли хадисы, которые передаются исключительно аль-Бухари в его \"Cахихе\"?",
           "description": "",
           "link": "https://telegra.ph/Sushchestvuyut-li-hadisy-kotorye-peredayutsya-isklyuchitelno-ot-al-Buhari-v-ego-sahihe-03-26"
+        },
+        {
+          "id": "b12",
+          "type": "footer",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "text": "© 2026 A storehouse of knowledge",
+          "bgColor": "#1C2A24",
+          "textColor": "#d4d4d0",
+          "socials": [
+            {
+              "platform": "Instagram",
+              "url": "#"
+            },
+            {
+              "platform": "Telegram",
+              "url": "#"
+            },
+            {
+              "platform": "YouTube",
+              "url": "#"
+            }
+          ]
         }
       ],
       "background": {
@@ -226,7 +257,7 @@
             "value": "transparent"
           },
           "shadow": "custom",
-          "shadowIntensity": 15,
+          "shadowIntensity": "7",
           "shadowBlur": 20,
           "shadowX": 0,
           "shadowY": 8,
@@ -235,24 +266,62 @@
           "items": [
             {
               "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783893938974_ChatGPT_Image_12____._2026__.__23_32_38.png",
-              "link": "#",
+              "link": "https://www.instagram.com/astorehouseofknowledge?igsh=MW54anZ1bG1lOXc4eg==",
               "imageWidth": "100%",
               "imageHeight": "250px",
               "objectFit": "cover"
             },
             {
-              "image": "",
-              "link": "#",
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783896688615_ChatGPT_Image_12____._2026__.__23_31_55.png",
+              "link": "https://t.me/astorehouse_of_knowledge",
               "imageWidth": "100%",
               "imageHeight": "250px",
               "objectFit": "cover"
             },
             {
-              "image": "",
-              "link": "#",
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783896759394_ChatGPT_Image_12____._2026__.__23_02_00.png",
+              "link": "https://youtube.com/@astorehouseofknowledge1?si=XBmBxNSm5rmNpkBy",
               "imageWidth": "100%",
               "imageHeight": "250px",
               "objectFit": "cover"
+            },
+            {
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783896779382_ChatGPT_Image_12____._2026__.__23_30_56.png",
+              "link": "https://www.tiktok.com/@a.storehouseofknowledge?_r=1&_t=ZS-97ptkEWVCyK",
+              "imageWidth": "100%",
+              "imageHeight": "250px",
+              "objectFit": "cover"
+            }
+          ]
+        },
+        {
+          "id": "b11",
+          "type": "footer",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "none",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "text": "© 2026 A storehouse of knowledge",
+          "bgColor": "#1C2A24",
+          "textColor": "#d4d4d0",
+          "socials": [
+            {
+              "platform": "Instagram",
+              "url": "#"
+            },
+            {
+              "platform": "Telegram",
+              "url": "#"
+            },
+            {
+              "platform": "YouTube",
+              "url": "#"
             }
           ]
         }
@@ -265,8 +334,34 @@
     "about": {
       "blocks": [
         {
-          "id": "b6",
+          "id": "b10",
+          "type": "text",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "none",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "title": "Этот проект A storehouse of knowledge",
+          "content": "принадлежит студенту который требует знания уже 17 лет. Начинал он свой путь в Египте, где он провел 3 года. Затем он отправился в Иорданию где находится до сих пор. На данный момент он обучается в Иорданском университете на факультете шариата"
+        },
+        {
+          "id": "b9",
           "type": "footer",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "none",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
           "text": "© 2026 Мой сайт",
           "bgColor": "#1C2A24",
           "textColor": "#d4d4d0",
@@ -285,7 +380,11 @@
             }
           ]
         }
-      ]
+      ],
+      "background": {
+        "type": "color",
+        "value": "#f5f5f5"
+      }
     }
   },
   "header": {
