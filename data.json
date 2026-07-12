@@ -48,14 +48,46 @@
     "articles": {
       "blocks": [
         {
-          "id": "b3",
+          "id": "b1",
+          "type": "hero",
+          "background": {
+            "type": "color",
+            "value": "#5b7057"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "2",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "title": "Статьи",
+          "subtitle": "из этих статей можно извлечь много пользы",
+          "bgColor": "#f0f0f0",
+          "textColor": "#dfece6"
+        },
+        {
+          "id": "b2",
           "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": "3",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
           "image": "",
-          "title": "Название статьи",
-          "description": "Описание",
-          "link": "#"
+          "title": "Как возникла религия?",
+          "description": "Отрывок из книги «Последний пророк: Доказательства подлинности Ислама»",
+          "link": "https://telegra.ph/Kak-voznikla-religiya--Nekotorye-ateisty-utverzhdayut-chto-totemizm-lezhit-v-osnove-vseh-religij-06-02"
         }
-      ]
+      ],
+      "background": {
+        "type": "color",
+        "value": "#f5f5f5"
+      }
     },
     "socials": {
       "blocks": [
