@@ -40,19 +40,6 @@
           "title": "Хранилище знаний"
         },
         {
-          "id": "b3",
-          "type": "hero",
-          "background": {
-            "type": "color",
-            "value": "transparent"
-          },
-          "title": "Заголовок",
-          "subtitle": "Подзаголовок",
-          "bgColor": "#f0f0f0",
-          "textColor": "#1C2A24",
-          "shadow": "custom"
-        },
-        {
           "id": "b1",
           "type": "services",
           "background": {
@@ -60,10 +47,10 @@
             "value": "transparent"
           },
           "shadow": "custom",
-          "shadowIntensity": 20,
-          "shadowBlur": 20,
-          "shadowX": 0,
-          "shadowY": 8,
+          "shadowIntensity": "6",
+          "shadowBlur": "30",
+          "shadowX": "11",
+          "shadowY": "17",
           "shadowColor": "#000000",
           "title": "Наши услуги",
           "items": [
@@ -83,24 +70,6 @@
               "desc": "Описание"
             }
           ]
-        },
-        {
-          "id": "b2",
-          "type": "article",
-          "background": {
-            "type": "color",
-            "value": "transparent"
-          },
-          "shadow": "none",
-          "shadowIntensity": 20,
-          "shadowBlur": 20,
-          "shadowX": 0,
-          "shadowY": 8,
-          "shadowColor": "#000000",
-          "image": "",
-          "title": "Название статьи",
-          "description": "Описание",
-          "link": "#"
         }
       ],
       "background": {
