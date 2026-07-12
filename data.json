@@ -24,18 +24,16 @@
     "home": {
       "blocks": [
         {
-          "id": "b1",
-          "type": "article",
-          "image": "",
-          "title": "Название статьи",
-          "description": "Описание",
-          "link": "#"
-        },
-        {
-          "id": "b1",
-          "type": "video",
-          "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-          "title": "Видео"
+          "id": "b2",
+          "type": "header",
+          "logo": "NJ",
+          "showBtn": false,
+          "btnText": "Связаться",
+          "btnLink": "#",
+          "bgColor": "#ffffff",
+          "textColor": "#11221b",
+          "btnBgColor": "#ffffff",
+          "title": "FCVGH"
         }
       ]
     },
