@@ -11,8 +11,54 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', Arial, sans-serif; background: #f5f5f5; color: #1C2A24; line-height: 1.6; min-height: 100vh; transition: background 0.5s; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        .loading { display: flex; align-items: center; justify-content: center; height: 100vh; font-size: 20px; color: #999; flex-direction: column; gap: 12px; }
-        .loading .spinner { width: 40px; height: 40px; border: 4px solid #e0e0e0; border-top-color: #2F5E52; border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+        /* ===== ЭКРАН ЗАГРУЗКИ ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loading-screen .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #2F5E52;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading-screen .progress-text {
+            margin-top: 16px;
+            font-size: 16px;
+            color: #888;
+        }
+        .loading-screen .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+        .loading-screen .progress-bar .fill {
+            height: 100%;
+            width: 0%;
+            background: #2F5E52;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .block { margin: 16px 0; border-radius: 16px; overflow: hidden; transition: 0.3s; }
@@ -108,12 +154,17 @@
             transform: scale(1.03);
         }
 
-        /* ===== АДАПТИВ ===== */
+        .empty-state { text-align: center; padding: 80px 20px; color: #999; }
+        .empty-state h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #555; margin-bottom: 8px; }
+        .empty-state p { font-size: 16px; }
+        .page-content { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-bg { min-height: 100vh; }
+
         @media (max-width: 820px) {
             .block-grid .grid-4 { grid-template-columns: repeat(2,1fr); }
             .block-grid .grid-3 { grid-template-columns: repeat(2,1fr); }
             .block-grid .grid-2 { grid-template-columns: 1fr 1fr; }
-            /* Фото-кнопки остаются 2 колонки */
             .block-photo-button .grid { grid-template-columns: repeat(2, 1fr); }
             .block-header .header-content { flex-direction: column; align-items: stretch; }
             .block-header .nav { justify-content: center; }
@@ -124,37 +175,139 @@
         }
         @media (max-width: 480px) {
             .block-grid .grid-4, .block-grid .grid-3, .block-grid .grid-2 { grid-template-columns: 1fr; }
-            /* Фото-кнопки — тоже 2 колонки на телефоне */
             .block-photo-button .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .block-photo-button .grid-item .img-wrap { aspect-ratio: 1 / 1; }
             .block-hero h1 { font-size: 26px; }
             .block-header .nav { gap: 14px; font-size: 13px; }
         }
-
-        .empty-state { text-align: center; padding: 80px 20px; color: #999; }
-        .empty-state h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #555; margin-bottom: 8px; }
-        .empty-state p { font-size: 16px; }
-        .page-content { animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .page-bg { min-height: 100vh; }
     </style>
 </head>
 <body>
-    <div id="app">
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <span>Загрузка сайта...</span>
+
+    <!-- ===== ЭКРАН ЗАГРУЗКИ ===== -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+        <div class="progress-text" id="progressText">Загрузка...</div>
+        <div class="progress-bar">
+            <div class="fill" id="progressFill"></div>
         </div>
+    </div>
+
+    <div id="app">
         <div id="content" style="display:none;"></div>
     </div>
 
     <script>
+        // ============================================================
+        //  ПРЕДЗАГРУЗКА ВСЕХ КАРТИНОК
+        // ============================================================
+        async function preloadAllImages() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            // Получаем все ссылки на картинки из data.json
+            try {
+                const resp = await fetch('data.json?t=' + Date.now());
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const data = await resp.json();
+
+                // Собираем все URL картинок
+                const imageUrls = [];
+                
+                // Из блоков photo-button
+                if (data.pages) {
+                    Object.values(data.pages).forEach(page => {
+                        if (page.blocks) {
+                            page.blocks.forEach(block => {
+                                if (block.type === 'photo-button' && block.items) {
+                                    block.items.forEach(item => {
+                                        if (item.image && item.image.startsWith('http')) {
+                                            imageUrls.push(item.image);
+                                        }
+                                    });
+                                }
+                                if (block.type === 'article' && block.image && block.image.startsWith('http')) {
+                                    imageUrls.push(block.image);
+                                }
+                                if (block.background && block.background.image && block.background.image.startsWith('http')) {
+                                    imageUrls.push(block.background.image);
+                                }
+                            });
+                        }
+                    });
+                }
+
+                // Если есть корневые blocks
+                if (data.blocks) {
+                    data.blocks.forEach(block => {
+                        if (block.type === 'photo-button' && block.items) {
+                            block.items.forEach(item => {
+                                if (item.image && item.image.startsWith('http')) {
+                                    imageUrls.push(item.image);
+                                }
+                            });
+                        }
+                        if (block.type === 'article' && block.image && block.image.startsWith('http')) {
+                            imageUrls.push(block.image);
+                        }
+                    });
+                }
+
+                // Убираем дубликаты
+                const uniqueUrls = [...new Set(imageUrls)];
+                const total = uniqueUrls.length;
+
+                if (total === 0) {
+                    // Нет картинок — сразу показываем сайт
+                    loadingScreen.classList.add('hidden');
+                    return;
+                }
+
+                // Загружаем все картинки параллельно
+                let loaded = 0;
+                const promises = uniqueUrls.map(url => {
+                    return new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            loaded++;
+                            const percent = Math.round((loaded / total) * 100);
+                            progressFill.style.width = percent + '%';
+                            progressText.textContent = `Загрузка ${loaded} из ${total}`;
+                            resolve();
+                        };
+                        img.onerror = () => {
+                            loaded++;
+                            const percent = Math.round((loaded / total) * 100);
+                            progressFill.style.width = percent + '%';
+                            progressText.textContent = `Загрузка ${loaded} из ${total}`;
+                            resolve();
+                        };
+                        img.src = url;
+                    });
+                });
+
+                await Promise.all(promises);
+
+                // Все картинки загружены
+                progressText.textContent = 'Готово!';
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 400);
+
+            } catch (e) {
+                console.warn('Ошибка предзагрузки:', e.message);
+                loadingScreen.classList.add('hidden');
+            }
+        }
+
+        // ============================================================
+        //  ЗАГРУЗКА И РЕНДЕР САЙТА
+        // ============================================================
         let siteData = null;
         let currentPage = 'home';
 
         async function loadSite() {
-            const loading = document.getElementById('loading');
             const content = document.getElementById('content');
             let data = null;
 
@@ -170,7 +323,6 @@
                 console.warn('Ошибка загрузки:', e.message);
             }
 
-            loading.style.display = 'none';
             content.style.display = 'block';
 
             if (!data) {
@@ -188,25 +340,6 @@
 
             siteData = data;
             renderSite();
-            setTimeout(initLazyLoading, 300);
-        }
-
-        // ============================================================
-        //  LAZY LOADING
-        // ============================================================
-        function initLazyLoading() {
-            const images = document.querySelectorAll('img[data-src]');
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img);
-                    }
-                });
-            });
-            images.forEach(img => imageObserver.observe(img));
         }
 
         // ============================================================
@@ -375,7 +508,7 @@
                 </div>`;
         }
 
-        // ===== ФОТО-КНОПКА — всегда 2 колонки =====
+        // ===== ФОТО-КНОПКА =====
         function renderPhotoButtons(block, styleAttr) {
             const items = block.items || [];
             let gridHTML = items.map(item => {
@@ -384,7 +517,7 @@
                         <div class="grid-item">
                             <a href="${item.link || '#'}">
                                 <div class="img-wrap">
-                                    ${imgUrl ? `<img data-src="${imgUrl}" alt="" loading="lazy">` : '<span style="color:#ccc;font-size:14px;">Нет картинки</span>'}
+                                    ${imgUrl ? `<img src="${imgUrl}" alt="">` : '<span style="color:#ccc;font-size:14px;">Нет картинки</span>'}
                                 </div>
                             </a>
                         </div>
@@ -412,7 +545,7 @@
             const imgUrl = block.image || '';
             return `<div class="block block-article" ${styleAttr}>
                     <div class="block-inner" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;padding:24px;">
-                        ${imgUrl ? `<img data-src="${imgUrl}" class="article-img" alt="" loading="lazy">` : ''}
+                        ${imgUrl ? `<img src="${imgUrl}" class="article-img" alt="">` : ''}
                         <div class="article-body">
                             <h3>${block.title || 'Статья'}</h3>
                             <p>${block.description || ''}</p>
@@ -450,7 +583,6 @@
             if (!siteData.pages[pageKey]) return;
             currentPage = pageKey;
             renderSite();
-            setTimeout(initLazyLoading, 300);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -468,7 +600,16 @@
             });
         }
 
-        loadSite();
+        // ============================================================
+        //  ЗАПУСК
+        // ============================================================
+        // Сначала предзагружаем картинки, потом показываем сайт
+        async function init() {
+            await preloadAllImages();
+            await loadSite();
+        }
+
+        init();
     </script>
 </body>
 </html>
