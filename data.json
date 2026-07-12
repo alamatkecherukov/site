@@ -47,9 +47,9 @@
             "value": "transparent"
           },
           "shadow": "custom",
-          "shadowIntensity": "6",
-          "shadowBlur": "30",
-          "shadowX": "11",
+          "shadowIntensity": "1",
+          "shadowBlur": "40",
+          "shadowX": "0",
           "shadowY": "17",
           "shadowColor": "#000000",
           "title": "Наши услуги",
