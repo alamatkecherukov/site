@@ -49,7 +49,58 @@
           "title": "Заголовок",
           "subtitle": "Подзаголовок",
           "bgColor": "#f0f0f0",
-          "textColor": "#1C2A24"
+          "textColor": "#1C2A24",
+          "shadow": "custom"
+        },
+        {
+          "id": "b1",
+          "type": "services",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": 20,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "title": "Наши услуги",
+          "items": [
+            {
+              "icon": "🌳",
+              "title": "Услуга 1",
+              "desc": "Описание"
+            },
+            {
+              "icon": "🏡",
+              "title": "Услуга 2",
+              "desc": "Описание"
+            },
+            {
+              "icon": "🎨",
+              "title": "Услуга 3",
+              "desc": "Описание"
+            }
+          ]
+        },
+        {
+          "id": "b2",
+          "type": "article",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "none",
+          "shadowIntensity": 20,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "image": "",
+          "title": "Название статьи",
+          "description": "Описание",
+          "link": "#"
         }
       ],
       "background": {
