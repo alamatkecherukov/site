@@ -70,7 +70,7 @@
           "type": "hero",
           "background": {
             "type": "color",
-            "value": "#ffffff"
+            "value": "#446f4f"
           },
           "shadow": "custom",
           "shadowIntensity": "2",
@@ -81,7 +81,7 @@
           "title": "Статьи",
           "subtitle": "из этих статей можно извлечь много пользы",
           "bgColor": "#f0f0f0",
-          "textColor": "#dfece6"
+          "textColor": "#ededed"
         },
         {
           "id": "b2",
@@ -214,7 +214,7 @@
           "type": "footer",
           "background": {
             "type": "color",
-            "value": "transparent"
+            "value": "#252222"
           },
           "shadow": "custom",
           "shadowIntensity": 15,
