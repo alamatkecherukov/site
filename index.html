@@ -108,11 +108,10 @@
         .block-footer { background: #1C2A24; border-radius: 16px; color: #d4d4d0; }
         .block-footer .footer-inner { text-align: center; padding: 32px 24px; }
         .block-footer .footer-socials { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-        .block-footer .footer-socials a { color: #d4d4d0; text-decoration: none; opacity: 0.6; font-size: 14px; transition: 0.3s; }
-        .block-footer .footer-socials a:hover { opacity: 1; color: #EBC8A1; }
+        .block-footer .footer-socials a { color: #d4d4d0; text-decoration: none; opacity: 0.6; font-size: 14px; transition: 0.3s; padding: 4px 8px; border-radius: 4px; }
+        .block-footer .footer-socials a:hover { opacity: 1; color: #EBC8A1; background: rgba(255,255,255,0.05); }
         .block-footer .footer-text { font-size: 13px; opacity: 0.5; }
 
-        /* ===== ФОТО-КНОПКА — всегда 2 колонки ===== */
         .block-photo-button .grid {
             display: grid;
             gap: 20px;
@@ -184,7 +183,6 @@
 </head>
 <body>
 
-    <!-- ===== ЭКРАН ЗАГРУЗКИ ===== -->
     <div class="loading-screen" id="loadingScreen">
         <div class="spinner"></div>
         <div class="progress-text" id="progressText">Загрузка...</div>
@@ -198,24 +196,17 @@
     </div>
 
     <script>
-        // ============================================================
-        //  ПРЕДЗАГРУЗКА ВСЕХ КАРТИНОК
-        // ============================================================
         async function preloadAllImages() {
             const loadingScreen = document.getElementById('loadingScreen');
             const progressFill = document.getElementById('progressFill');
             const progressText = document.getElementById('progressText');
 
-            // Получаем все ссылки на картинки из data.json
             try {
                 const resp = await fetch('data.json?t=' + Date.now());
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const data = await resp.json();
 
-                // Собираем все URL картинок
                 const imageUrls = [];
-                
-                // Из блоков photo-button
                 if (data.pages) {
                     Object.values(data.pages).forEach(page => {
                         if (page.blocks) {
@@ -237,8 +228,6 @@
                         }
                     });
                 }
-
-                // Если есть корневые blocks
                 if (data.blocks) {
                     data.blocks.forEach(block => {
                         if (block.type === 'photo-button' && block.items) {
@@ -254,17 +243,13 @@
                     });
                 }
 
-                // Убираем дубликаты
                 const uniqueUrls = [...new Set(imageUrls)];
                 const total = uniqueUrls.length;
-
                 if (total === 0) {
-                    // Нет картинок — сразу показываем сайт
                     loadingScreen.classList.add('hidden');
                     return;
                 }
 
-                // Загружаем все картинки параллельно
                 let loaded = 0;
                 const promises = uniqueUrls.map(url => {
                     return new Promise((resolve) => {
@@ -288,8 +273,6 @@
                 });
 
                 await Promise.all(promises);
-
-                // Все картинки загружены
                 progressText.textContent = 'Готово!';
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
@@ -301,9 +284,6 @@
             }
         }
 
-        // ============================================================
-        //  ЗАГРУЗКА И РЕНДЕР САЙТА
-        // ============================================================
         let siteData = null;
         let currentPage = 'home';
 
@@ -342,9 +322,6 @@
             renderSite();
         }
 
-        // ============================================================
-        //  РЕНДЕР
-        // ============================================================
         function renderSite() {
             const container = document.getElementById('content');
             const page = siteData.pages[currentPage] || {};
@@ -480,10 +457,11 @@
         }
 
         function renderHero(block, styleAttr) {
+            const textColor = block.textColor || '#1C2A24';
             return `<div class="block block-hero" ${styleAttr}>
                     <div class="block-inner">
-                        <h1>${block.title || 'Заголовок'}</h1>
-                        <p>${block.subtitle || 'Подзаголовок'}</p>
+                        <h1 style="color:${textColor};">${block.title || 'Заголовок'}</h1>
+                        <p style="color:${textColor};">${block.subtitle || 'Подзаголовок'}</p>
                     </div>
                 </div>`;
         }
@@ -508,7 +486,6 @@
                 </div>`;
         }
 
-        // ===== ФОТО-КНОПКА =====
         function renderPhotoButtons(block, styleAttr) {
             const items = block.items || [];
             let gridHTML = items.map(item => {
@@ -568,8 +545,12 @@
 
         function renderFooter(block, styleAttr) {
             let socialsHTML = '';
-            if (block.socials) {
-                socialsHTML = block.socials.map(s => `<a href="${s.url || '#'}">${s.platform || 'Соцсеть'}</a>`).join('');
+            if (block.socials && block.socials.length > 0) {
+                socialsHTML = block.socials.map(s => {
+                    const url = s.url && s.url !== '#' ? s.url : '#';
+                    const platform = s.platform || 'Соцсеть';
+                    return `<a href="${url}" target="_blank" rel="noopener noreferrer">${platform}</a>`;
+                }).join('');
             }
             return `<div class="block block-footer" ${styleAttr}>
                     <div class="block-inner footer-inner">
@@ -600,10 +581,6 @@
             });
         }
 
-        // ============================================================
-        //  ЗАПУСК
-        // ============================================================
-        // Сначала предзагружаем картинки, потом показываем сайт
         async function init() {
             await preloadAllImages();
             await loadSite();
