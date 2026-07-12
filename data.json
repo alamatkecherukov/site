@@ -303,38 +303,6 @@
               "objectFit": "cover"
             }
           ]
-        },
-        {
-          "id": "b1",
-          "type": "footer",
-          "background": {
-            "type": "color",
-            "value": "#221616"
-          },
-          "shadow": "custom",
-          "shadowIntensity": 15,
-          "shadowBlur": 20,
-          "shadowX": 0,
-          "shadowY": 8,
-          "shadowColor": "#000000",
-          "text": "© 2026 A storehouse of knowledge",
-          "bgColor": "#1C2A24",
-          "textColor": "#d4d4d0",
-          "socials": [
-            {
-              "platform": "Instagram",
-              "url": "#"
-            },
-            {
-              "platform": "Telegram",
-              "url": "#"
-            },
-            {
-              "platform": "YouTube",
-              "url": "#"
-            }
-          ],
-          "title": "© 2026 A storehouse of knowledge"
         }
       ],
       "background": {
