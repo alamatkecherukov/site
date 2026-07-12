@@ -38,9 +38,48 @@
           "textColor": "#1C2A24",
           "btnBgColor": "#EBC8A1",
           "title": "Хранилище знаний"
+        }
+      ],
+      "background": {
+        "type": "color",
+        "value": "#f5f5f5"
+      }
+    },
+    "articles": {
+      "blocks": [
+        {
+          "id": "b3",
+          "type": "article",
+          "image": "",
+          "title": "Название статьи",
+          "description": "Описание",
+          "link": "#"
+        }
+      ]
+    },
+    "socials": {
+      "blocks": [
+        {
+          "id": "b2",
+          "type": "hero",
+          "background": {
+            "type": "image",
+            "value": "transparent",
+            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAA2CAYAAADpjc+LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADgSURBVHhe7dUxAYAwEMDAB6ed6gLrsGCgme+WSMi1n/UOABy6/wLAEQMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEAASAwEgMRAAEgMBIDEQABIDASAxEACCmQ8qzwKxxA+WoAAAAABJRU5ErkJggg=="
+          },
+          "shadow": "custom",
+          "shadowIntensity": "3",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "title": "Обязательно посетите наши соцсети",
+          "subtitle": "там много интересного",
+          "bgColor": "#ffffff",
+          "textColor": "#1C2A24"
         },
         {
-          "id": "b1",
+          "id": "b4",
           "type": "services",
           "background": {
             "type": "color",
@@ -48,9 +87,9 @@
           },
           "shadow": "custom",
           "shadowIntensity": "1",
-          "shadowBlur": "40",
-          "shadowX": "0",
-          "shadowY": "17",
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
           "shadowColor": "#000000",
           "title": "Наши услуги",
           "items": [
@@ -76,44 +115,6 @@
         "type": "color",
         "value": "#f5f5f5"
       }
-    },
-    "articles": {
-      "blocks": [
-        {
-          "id": "b3",
-          "type": "article",
-          "image": "",
-          "title": "Название статьи",
-          "description": "Описание",
-          "link": "#"
-        }
-      ]
-    },
-    "socials": {
-      "blocks": [
-        {
-          "id": "b4",
-          "type": "services",
-          "title": "Наши услуги",
-          "items": [
-            {
-              "icon": "🌳",
-              "title": "Услуга 1",
-              "desc": "Описание"
-            },
-            {
-              "icon": "🏡",
-              "title": "Услуга 2",
-              "desc": "Описание"
-            },
-            {
-              "icon": "🎨",
-              "title": "Услуга 3",
-              "desc": "Описание"
-            }
-          ]
-        }
-      ]
     },
     "about": {
       "blocks": [
