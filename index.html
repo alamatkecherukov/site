@@ -66,7 +66,6 @@
         .block-footer .footer-socials a:hover { opacity: 1; color: #EBC8A1; }
         .block-footer .footer-text { font-size: 13px; opacity: 0.5; }
 
-        /* ===== ФОТО-КНОПКА ===== */
         .block-photo-button .grid-item {
             padding: 0;
             overflow: hidden;
@@ -102,7 +101,6 @@
             transform: scale(1.03);
         }
 
-        /* ===== ТЕКСТОВЫЙ БЛОК ===== */
         .block-text { background: #ffffff; border-radius: 16px; }
         .block-text .text-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 12px; }
         .block-text .text-content { font-size: 16px; color: #4a5a54; line-height: 1.8; }
@@ -291,14 +289,15 @@
                     `;
             }
 
-            // ===== ТЕНЬ =====
+            // ===== ТЕНЬ С ПОЗИЦИЕЙ =====
             let shadowStyle = '';
             if (block.shadow && block.shadow !== 'none') {
-                const intensity = block.shadow === 'small' ? '0 4px 20px' :
-                                  block.shadow === 'medium' ? '0 8px 40px' :
-                                  '0 16px 60px';
+                const intensity = parseInt(block.shadowIntensity) || 20;
+                const blur = parseInt(block.shadowBlur) || 20;
+                const x = parseInt(block.shadowX) || 0;
+                const y = parseInt(block.shadowY) || 8;
                 const color = block.shadowColor || 'rgba(0,0,0,0.1)';
-                shadowStyle = `box-shadow: ${intensity} ${color};`;
+                shadowStyle = `box-shadow: ${x}px ${y}px ${blur}px ${color};`;
             }
 
             const styleAttr = `style="${bgStyle} ${shadowStyle}"`;
