@@ -79,34 +79,31 @@
           "textColor": "#1C2A24"
         },
         {
-          "id": "b4",
-          "type": "services",
+          "id": "b1",
+          "type": "photo-button",
           "background": {
             "type": "color",
             "value": "transparent"
           },
           "shadow": "custom",
-          "shadowIntensity": "1",
+          "shadowIntensity": "3",
           "shadowBlur": 20,
           "shadowX": 0,
           "shadowY": 8,
           "shadowColor": "#000000",
-          "title": "Наши услуги",
+          "title": "Фото-кнопки",
           "items": [
             {
-              "icon": "🌳",
-              "title": "Услуга 1",
-              "desc": "Описание"
+              "image": "https://drive.google.com/file/d/18btczaz9ehY2XeGH3W5R7cAOITdvQIqs/view?usp=drive_link",
+              "link": "#"
             },
             {
-              "icon": "🏡",
-              "title": "Услуга 2",
-              "desc": "Описание"
+              "image": "",
+              "link": "#"
             },
             {
-              "icon": "🎨",
-              "title": "Услуга 3",
-              "desc": "Описание"
+              "image": "",
+              "link": "#"
             }
           ]
         }
