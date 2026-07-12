@@ -82,12 +82,11 @@
           "id": "b1",
           "type": "photo-button",
           "background": {
-            "type": "image",
-            "value": "transparent",
-            "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783893155210_Color_Hunt_Palette_bd4444f1dec473976a677e61.png"
+            "type": "color",
+            "value": "transparent"
           },
           "shadow": "custom",
-          "shadowIntensity": "3",
+          "shadowIntensity": 15,
           "shadowBlur": 20,
           "shadowX": 0,
           "shadowY": 8,
@@ -95,20 +94,25 @@
           "title": "Фото-кнопки",
           "items": [
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783892662006_ChatGPT_Image_12____._2026__.__23_32_38.png",
-              "link": "#"
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783893938974_ChatGPT_Image_12____._2026__.__23_32_38.png",
+              "link": "#",
+              "imageWidth": "100%",
+              "imageHeight": "250px",
+              "objectFit": "cover"
             },
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783892711557_ChatGPT_Image_12____._2026__.__23_31_55.png",
-              "link": "#"
+              "image": "",
+              "link": "#",
+              "imageWidth": "100%",
+              "imageHeight": "250px",
+              "objectFit": "cover"
             },
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783892760334_ChatGPT_Image_12____._2026__.__23_02_00.png",
-              "link": "#"
-            },
-            {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783892817695_ChatGPT_Image_12____._2026__.__23_30_56.png",
-              "link": "#"
+              "image": "",
+              "link": "#",
+              "imageWidth": "100%",
+              "imageHeight": "250px",
+              "objectFit": "cover"
             }
           ]
         }
