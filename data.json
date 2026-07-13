@@ -272,7 +272,7 @@
           "background": {
             "type": "image",
             "value": "#ffffff",
-            "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783901723128___________1_.jpg",
+            "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783902554522_Color_Hunt_Palette_bd4444f1dec473976a677e61.png",
             "size": "cover"
           },
           "shadow": "custom",
@@ -284,28 +284,28 @@
           "title": "Фото-кнопки",
           "items": [
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783900305197_ChatGPT_Image_12____._2026__.__23_32_38.png",
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783902527390_5377458956684432951.jpg",
               "link": "https://www.instagram.com/astorehouseofknowledge?igsh=MW54anZ1bG1lOXc4eg==",
               "imageWidth": "100%",
               "imageHeight": "250px",
               "objectFit": "cover"
             },
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783900333314_ChatGPT_Image_12____._2026__.__23_31_55.png",
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783902534099_5377458956684432947.jpg",
               "link": "https://t.me/astorehouse_of_knowledge",
               "imageWidth": "100%",
               "imageHeight": "250px",
               "objectFit": "cover"
             },
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783900349938_ChatGPT_Image_12____._2026__.__23_30_56.png",
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783902539990_5377458956684432948.jpg",
               "link": "https://www.tiktok.com/@a.storehouseofknowledge?_r=1&_t=ZS-97ptkEWVCyK",
               "imageWidth": "100%",
               "imageHeight": "250px",
               "objectFit": "cover"
             },
             {
-              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783900443890_ChatGPT_Image_12____._2026__.__23_02_00.png",
+              "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783902545966_5377458956684432950.jpg",
               "link": "https://youtube.com/@astorehouseofknowledge1?si=XBmBxNSm5rmNpkBy",
               "imageWidth": "100%",
               "imageHeight": "250px",
