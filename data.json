@@ -272,7 +272,8 @@
           "background": {
             "type": "image",
             "value": "#ffffff",
-            "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783901516749_360_F_984485666_irAhgy146MxjuNUgWfG8SF7VCcR5oFKn.jpg"
+            "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783901516749_360_F_984485666_irAhgy146MxjuNUgWfG8SF7VCcR5oFKn.jpg",
+            "size": "contain"
           },
           "shadow": "custom",
           "shadowIntensity": 15,
