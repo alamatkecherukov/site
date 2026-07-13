@@ -24,22 +24,6 @@
     "home": {
       "blocks": [
         {
-          "id": "b4",
-          "type": "header",
-          "background": {
-            "type": "color",
-            "value": "transparent"
-          },
-          "logo": "A storehouse of knowledge ",
-          "showBtn": false,
-          "btnText": "Связаться",
-          "btnLink": "#",
-          "bgColor": "#ffffff",
-          "textColor": "#1C2A24",
-          "btnBgColor": "#EBC8A1",
-          "title": "Хранилище знаний"
-        },
-        {
           "id": "b13",
           "type": "hero",
           "background": {
@@ -52,10 +36,47 @@
           "shadowX": 0,
           "shadowY": 8,
           "shadowColor": "#000000",
-          "title": "Заголовок",
-          "subtitle": "Подзаголовок",
+          "title": "General",
+          "subtitle": "на нашем сайте можно найти много всего интересного",
           "bgColor": "#f0f0f0",
           "textColor": "#1C2A24"
+        },
+        {
+          "id": "b2",
+          "type": "advantages",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "title": "что из себя представляет этот проект",
+          "items": [
+            {
+              "icon": "🎬",
+              "title": "Переводы видео",
+              "desc": ""
+            },
+            {
+              "icon": "📚",
+              "title": "Ответы на вопросы",
+              "desc": ""
+            },
+            {
+              "icon": "📱",
+              "title": "Короткие видео",
+              "desc": ""
+            },
+            {
+              "icon": "📜",
+              "title": "Апологетика ",
+              "desc": ""
+            }
+          ]
         }
       ],
       "background": {
@@ -208,37 +229,6 @@
           "title": "Существуют ли хадисы, которые передаются исключительно аль-Бухари в его \"Cахихе\"?",
           "description": "",
           "link": "https://telegra.ph/Sushchestvuyut-li-hadisy-kotorye-peredayutsya-isklyuchitelno-ot-al-Buhari-v-ego-sahihe-03-26"
-        },
-        {
-          "id": "b12",
-          "type": "footer",
-          "background": {
-            "type": "color",
-            "value": "#252222"
-          },
-          "shadow": "custom",
-          "shadowIntensity": 15,
-          "shadowBlur": 20,
-          "shadowX": 0,
-          "shadowY": 8,
-          "shadowColor": "#000000",
-          "text": "© 2026 A storehouse of knowledge",
-          "bgColor": "#1C2A24",
-          "textColor": "#d4d4d0",
-          "socials": [
-            {
-              "platform": "Instagram",
-              "url": "#"
-            },
-            {
-              "platform": "Telegram",
-              "url": "#"
-            },
-            {
-              "platform": "YouTube",
-              "url": "#"
-            }
-          ]
         }
       ],
       "background": {
@@ -264,7 +254,7 @@
           "title": "Соцсети",
           "subtitle": "обязательно посетите там много важного",
           "bgColor": "#f0f0f0",
-          "textColor": "#e5fbf1"
+          "textColor": "#2c493c"
         },
         {
           "id": "b2",
