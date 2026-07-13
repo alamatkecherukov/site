@@ -253,7 +253,7 @@
           "type": "hero",
           "background": {
             "type": "color",
-            "value": "#427141"
+            "value": "#ead7a4"
           },
           "shadow": "custom",
           "shadowIntensity": 15,
@@ -270,8 +270,8 @@
           "id": "b2",
           "type": "photo-button",
           "background": {
-            "type": "image",
-            "value": "#ffffff",
+            "type": "color",
+            "value": "#e0e0e0",
             "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783902554522_Color_Hunt_Palette_bd4444f1dec473976a677e61.png",
             "size": "cover"
           },
