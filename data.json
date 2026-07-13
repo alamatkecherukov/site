@@ -273,7 +273,7 @@
             "type": "image",
             "value": "#ffffff",
             "image": "https://raw.githubusercontent.com/alamatkecherukov/site/main/images/1783901723128___________1_.jpg",
-            "size": "contain"
+            "size": "cover"
           },
           "shadow": "custom",
           "shadowIntensity": 15,
