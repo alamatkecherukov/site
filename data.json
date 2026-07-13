@@ -24,6 +24,28 @@
     "home": {
       "blocks": [
         {
+          "id": "b5",
+          "type": "header",
+          "background": {
+            "type": "color",
+            "value": "transparent"
+          },
+          "shadow": "custom",
+          "shadowIntensity": 15,
+          "shadowBlur": 20,
+          "shadowX": 0,
+          "shadowY": 8,
+          "shadowColor": "#000000",
+          "logo": "A storehouse of knowledge",
+          "showBtn": false,
+          "btnText": "Связаться",
+          "btnLink": "",
+          "bgColor": "#ffffff",
+          "textColor": "#1C2A24",
+          "btnBgColor": "#EBC8A1",
+          "title": "Хранилище знаний"
+        },
+        {
           "id": "b13",
           "type": "hero",
           "background": {
@@ -326,37 +348,6 @@
           "shadowColor": "#000000",
           "title": "Этот проект A storehouse of knowledge",
           "content": "принадлежит студенту который требует знания уже 17 лет. Начинал он свой путь в Египте, где он провел 3 года. Затем он отправился в Иорданию где находится до сих пор. На данный момент он обучается в Иорданском университете на факультете шариата"
-        },
-        {
-          "id": "b9",
-          "type": "footer",
-          "background": {
-            "type": "color",
-            "value": "transparent"
-          },
-          "shadow": "none",
-          "shadowIntensity": 15,
-          "shadowBlur": 20,
-          "shadowX": 0,
-          "shadowY": 8,
-          "shadowColor": "#000000",
-          "text": "© 2026 Мой сайт",
-          "bgColor": "#1C2A24",
-          "textColor": "#d4d4d0",
-          "socials": [
-            {
-              "platform": "Instagram",
-              "url": "#"
-            },
-            {
-              "platform": "Telegram",
-              "url": "#"
-            },
-            {
-              "platform": "YouTube",
-              "url": "#"
-            }
-          ]
         }
       ],
       "background": {
